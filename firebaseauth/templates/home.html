@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+  Hi {{ user.username }}! <a href="{% url 'logout' %}">Log Out</a>
+  <br>
+
+  {% for c in categories %}
+    <a href="{% url 'category_details' c.id %}">
+    Name: {{c.name}} <t>
+    Grade: {{c.grade}} <t>
+    Level: {{c.level}} <t>
+    Subject: {{c.subject}} <t>
+
+    </a>
+    <br>
+  {% endfor %}
+  <br>
+  <form action="{% url 'new_category' %}" method="post">
+    {% csrf_token %}
+    <input type="submit" value="New category">
+  </form>
+
+
+
+  {% for q in data %}
+    {{q.id}}: {{ q.title }}
+    <br>
+    <t> A: {{q.answer1}} <t> B: {{q.answer2}} <t> C: {{q.answer3}} <t> D: {{q.answer4}}
+    <br>
+    <form action="{% url 'delete_question' q.id %}" method="post">
+      {% csrf_token %}
+      <input type="submit" value="Delete question {{q.id}}">
+    </form>
+
+  {% endfor %}
+  <br>
+  <form action="{% url 'new_question' %}" method="post">
+    {% csrf_token %}
+    <input type="submit" value="New question">
+  </form>
+
+{% else %}
+  <p>You are not logged in</p>
+  <a href="{% url 'login_firebase' %}">Log In</a>
+{% endif %}
+{% endblock %}

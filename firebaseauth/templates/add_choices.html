@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+ <h1>Add Choices</h1>
+  {%for c in choices%}
+    Choice: {{c.title}} Is answer: {{c.isAnswer}}
+    <br>
+  {% endfor %}
+<form action="" method="post" novalidate>
+  {% csrf_token %}
+  {{new_choice_form.as_p}}
+  <input type="submit" value="Submit">
+</form>
+
+{% endblock %}

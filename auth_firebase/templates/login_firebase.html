@@ -1,0 +1,364 @@
+<!------ Include the above in your HEAD tag ---------->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <style>
+
+/* sign in FORM */
+#logreg-forms{
+    width:412px;
+    margin:10vh auto;
+    background-color:#f3f3f3;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+#logreg-forms form {
+    width: 100%;
+    max-width: 410px;
+    padding: 15px;
+    margin: auto;
+}
+#logreg-forms .form-control {
+    position: relative;
+    box-sizing: border-box;
+    height: auto;
+    padding: 10px;
+    font-size: 16px;
+}
+#logreg-forms .form-control:focus { z-index: 2; }
+#logreg-forms .form-signin input[type="email"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+#logreg-forms .form-signin input[type="password"] {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+#logreg-forms .social-login{
+    width:390px;
+    margin:0 auto;
+    margin-bottom: 14px;
+}
+#logreg-forms .social-btn{
+    font-weight: 100;
+    color:white;
+    width:190px;
+    font-size: 0.9rem;
+}
+
+#logreg-forms a{
+    display: block;
+    padding-top:10px;
+    color:lightseagreen;
+}
+
+#logreg-form .lines{
+    width:200px;
+    border:1px solid red;
+}
+
+
+#logreg-forms button[type="submit"]{ margin-top:10px; }
+
+#logreg-forms .facebook-btn{  background-color:#3C589C; }
+
+#logreg-forms .google-btn{ background-color: #DF4B3B; }
+
+#logreg-forms .form-reset, #logreg-forms .form-signup{ display: none; }
+
+#logreg-forms .form-signup .social-btn{ width:210px; }
+
+#logreg-forms .form-signup input { margin-bottom: 2px;}
+
+.form-signup .social-login{
+    width:210px !important;
+    margin: 0 auto;
+}
+
+/* Mobile */
+
+@media screen and (max-width:500px){
+    #logreg-forms{
+        width:300px;
+    }
+
+    #logreg-forms  .social-login{
+        width:200px;
+        margin:0 auto;
+        margin-bottom: 10px;
+    }
+    #logreg-forms  .social-btn{
+        font-size: 1.3rem;
+        font-weight: 100;
+        color:white;
+        width:200px;
+        height: 56px;
+
+    }
+    #logreg-forms .social-btn:nth-child(1){
+        margin-bottom: 5px;
+    }
+    #logreg-forms .social-btn span{
+        display: none;
+    }
+    #logreg-forms  .facebook-btn:after{
+        content:'Facebook';
+    }
+
+    #logreg-forms  .google-btn:after{
+        content:'Google+';
+    }
+
+}
+    </style>
+    <title>Bootstrap 4 Login/Register Form</title>
+</head>
+<body>
+    <div id="logreg-forms">
+        <form class="form-signin" accept="#">
+            <h1 class="h3 mb-3 font-weight-normal" style="text-align: center"> Sign in</h1>
+            <div class="social-login">
+                <button class="btn google-btn social-btn" type="button" id="googleLogin"><span><i class="fab fa-google-plus-g"></i> Sign in with Google+</span> </button>
+            </div>
+            <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
+            <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
+
+            <button class="btn btn-success btn-block" id="loginbtn" type="button"><i class="fas fa-sign-in-alt"></i> Sign in</button>
+            <hr>
+            <!-- <p>Don't have an account!</p>  -->
+            <button class="btn btn-primary btn-block" type="button" id="btn-signup"><i class="fas fa-user-plus"></i> Sign up New Account</button>
+            </form>
+
+            <form action="/reset/password/" class="form-reset">
+                <input type="email" id="resetEmail" class="form-control" placeholder="Email address" required="" autofocus="">
+                <button class="btn btn-primary btn-block" type="submit">Reset Password</button>
+                <a href="#" id="cancel_reset"><i class="fas fa-angle-left"></i> Back</a>
+            </form>
+
+            <form action="#" class="form-signup">
+                {% comment %} <div class="social-login">
+                    <button class="btn google-btn social-btn" type="button"><span><i class="fab fa-google-plus-g"></i> Sign in with Google+</span> </button>
+                </div> {% endcomment %}
+
+                {% comment %} <p style="text-align:center">OR</p> {% endcomment %}
+
+                <input type="username" id="username" class="form-control" placeholder="username" required autofocus="">
+                <input type="email" id="useremail" class="form-control" placeholder="Email address" required autofocus="">
+                <input type="password" id="userpass" class="form-control" placeholder="Password" required autofocus="">
+                <input type="password" id="re_userpass" class="form-control" placeholder="Retype Password" required autofocus="">
+
+                <button class="btn btn-primary btn-block" type="button" id="signupbtn"><i class="fas fa-user-plus"></i> Sign Up</button>
+                <a href="#" id="cancel_signup"><i class="fas fa-angle-left"></i> Back</a>
+            </form>
+            <br>
+
+    </div>
+    <script>
+function toggleResetPswd(e){
+    e.preventDefault();
+    $('#logreg-forms .form-signin').toggle() // display:block or none
+    $('#logreg-forms .form-reset').toggle() // display:block or none
+}
+
+function toggleSignUp(e){
+    e.preventDefault();
+    $('#logreg-forms .form-signin').toggle(); // display:block or none
+    $('#logreg-forms .form-signup').toggle(); // display:block or none
+}
+
+$(()=>{
+    // Login Register Form
+    $('#logreg-forms #forgot_pswd').click(toggleResetPswd);
+    $('#logreg-forms #cancel_reset').click(toggleResetPswd);
+    $('#logreg-forms #btn-signup').click(toggleSignUp);
+    $('#logreg-forms #cancel_signup').click(toggleSignUp);
+});
+
+</script>
+
+    </p>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+ <!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.19.0/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.19.0/firebase-analytics.js"></script>
+<script defer src="https://www.gstatic.com/firebasejs/7.19.0/firebase-auth.js"></script>
+
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyCXVF7hzEkBASwk8F5LzjKhGAkEg_vxrw8",
+    authDomain: "fir-django-16c35.firebaseapp.com",
+    databaseURL: "https://fir-django-16c35-default-rtdb.firebaseio.com",
+    projectId: "fir-django-16c35",
+    storageBucket: "fir-django-16c35.appspot.com",
+    messagingSenderId: "444978418636",
+    appId: "1:444978418636:web:0e8c4e5812388936b0c369",
+    measurementId: "G-XZHM8NSB59"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+
+  var signupbtn=document.getElementById("signupbtn")
+  var usernamesignup=document.getElementById("username")
+  var emailsignup=document.getElementById("useremail")
+  var passswordsignup=document.getElementById("userpass")
+  var re_passswordsignup=document.getElementById("re_userpass")
+
+
+
+  //================Signup With Email and Password==========================
+  signupbtn.onclick=function(){
+      //signupbtn.disabled=true;
+      //signupbtn.textContent="Registering Your Account! Please Wait";
+      //firebase.auth().createUserWithEmailAndPassword(emailsignup.value,passswordsignup.value).then(function(response){
+      //  sendingVerifyEmail(signupbtn);
+      //      console.log(response);
+      //})
+      //.catch(function(error){
+      //  signupbtn.disabled=false;
+      //  signupbtn.textContent="Sign Up";
+      //    console.log(error);
+      //})
+      var xhr_sign = new XMLHttpRequest();
+
+      xhr_sign.addEventListener("readystatechange", function() {
+
+        var xhr_sign = new XMLHttpRequest();
+        if(this.readyState === 4) {
+            console.log(this.responseText);
+            if(this.responseText=="User Created."){
+                alert("Login Successfully.");
+                location='/';
+            }
+            else{
+                alert(this.responseText);
+            }
+        }
+        });
+    xhr_sign.open("POST", "http://{{request.get_host}}/sign_up_with_username", true);
+    xhr_sign.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
+    xhr_sign.send("username="+usernamesignup.value+"&passswordsignup="+passswordsignup.value+"&re_passswordsignup="+re_passswordsignup.value+"&email="+emailsignup.value);
+  }
+
+  function sendingVerifyEmail(button){
+     firebase.auth().currentUser.sendEmailVerification().then(function(response){
+                signupbtn.disabled=false;
+        signupbtn.textContent="Sign Up S";
+
+        console.log(response);
+     })
+     .catch(function(error){
+                signupbtn.disabled=false;
+        signupbtn.textContent="Sign Up S";
+
+         console.log(error);
+     })
+  }
+  //================End Signup With Email and Password======================
+
+  //==========================Sign in With Email and Password============================
+
+   var loginemail=document.getElementById("inputEmail");
+   var loginpassword=document.getElementById("inputPassword");
+   var loginbtn=document.getElementById("loginbtn");
+
+
+   loginbtn.onclick=function(){
+    loginbtn.disabled=true;
+    var xhr = new XMLHttpRequest();
+
+    xhr.addEventListener("readystatechange", function() {
+        if(this.readyState === 4) {
+            console.log(this.responseText);
+            if(this.responseText=="Login Successfully."){
+                alert("Login Successfully.");
+                location='/';
+            }
+            else if(this.responseText=="Wrong email or password."){
+                alert("Wrong email or password.")
+            }
+            else{
+                alert("There's no user using email: " + loginemail.value);
+            }
+        }
+        });
+    xhr.open("POST", "http://{{request.get_host}}/login_with_username", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
+    xhr.send("email="+loginemail.value+"&password="+loginpassword.value);
+   }
+  //======================Sign With Email and Password
+
+
+   //===================Saving Login Details in My Server Using AJAX================
+   function sendDatatoServerPhp(email,provider,token,username){
+
+        var xhr = new XMLHttpRequest();
+        //xhr.withCredentials = true;
+
+        xhr.addEventListener("readystatechange", function() {
+        if(this.readyState === 4) {
+            console.log(this.responseText);
+            if(this.responseText=="Login Successfully." || this.responseText=="User Created."){
+                alert("Login Successfully.");
+                location='/';
+            }
+            else if(this.responseText=="Please Verify Your Email to Get Login"){
+                alert("Please Verify Your Email to Login.")
+            }
+            else{
+                alert("Error in Login.");
+            }
+        }
+        });
+
+        xhr.open("POST", "http://{{request.get_host}}/auth_firebase_login", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
+        xhr.send("email="+email+"&provider="+provider+"&username="+username+"&token="+token);
+   }
+   //===========================End Saving Details in My Server=======================
+
+   ///=================Login With google===========================
+   var googleLogin=document.getElementById("googleLogin");
+
+   googleLogin.onclick=function(){
+       var provider=new firebase.auth.GoogleAuthProvider();
+
+       firebase.auth().signInWithPopup(provider).then(function(response){
+           var userobj=response.user;
+            var token=userobj.xa;
+            var provider="google";
+            var email=userobj.email;
+            if(token!=null && token!=undefined && token!=""){
+            sendDatatoServerPhp(email,provider,token,userobj.displayName);
+            }
+
+           console.log(response);
+       })
+       .catch(function(error){
+           console.log(error);
+       })
+
+
+   }
+   //=======================End Login With Google==================
+</script>
+</body>
+</html>

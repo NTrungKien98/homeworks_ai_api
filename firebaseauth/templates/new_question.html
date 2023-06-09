@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+ <h1>Create new Question</h1>
+
+<form action="" method="post" novalidate>
+  {% csrf_token %}
+  {{new_question_form.as_p}}
+  {{new_choice_form.as_p}}
+  <input type="submit" value="Submit">
+</form>
+
+{% endblock %}

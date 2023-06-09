@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</head>
+<body>
+    <div>
+        {{response}}
+    <div>
+    <div id="logreg-forms">
+        <input id='input'> </input>
+    </div>
+    <button type="button" id="ok_chat"><span>OK</span></button>
+    <script>
+        var input  = document.getElementById("input");
+        var response_p  = document.getElementById("response");
+        var ok_chat_btn     = document.getElementById("ok_chat");
+
+
+        ok_chat_btn.onclick=function(){
+            var xhr = new XMLHttpRequest();
+            //xhr.withCredentials = true;
+
+            xhr.addEventListener("readystatechange", function() {
+                });
+
+            xhr.open("POST", "http://127.0.0.1:8000/chat/", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.send("message="+input.value);
+
+        }
+    </script>
+</body>
+</html>
