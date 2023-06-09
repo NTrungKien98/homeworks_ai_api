@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import *
 urlpatterns = [
-    path("api/questions", QuestionAPIView.as_view()),
+    path("api/questions/<int:id>", QuestionAPIView.as_view()),
     path("api/categories/<int:grade>/<int:subject>/<int:level>", CategoryAPIView.as_view()),
     path("login/", login_with_firebase, name="login_firebase"),
     path("auth_firebase_login", auth_firebase_login),

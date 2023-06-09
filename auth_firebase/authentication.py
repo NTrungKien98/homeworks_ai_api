@@ -17,7 +17,7 @@ from django.conf import settings
 #         "auth_provider_x509_cert_url" : settings.FIREBASE_AUTH_PROVIDER_X509_CERT_URL,
 #         "client_x509_cert_url" : settings.FIREBASE_CLIENT_X509_CERT_URL,
 # })
-cred = credentials.Certificate("/home/k/Desktop/django/firebaseauth/fir-django-16c35-firebase-adminsdk-g1fvv-3288d3700d.json")
+cred = credentials.Certificate("././fir-django-16c35-firebase-adminsdk-g1fvv-3288d3700d.json")
 if not "default_app" in globals():
         default_app = firebase_admin.initialize_app(cred)
 """FIREBASE AUTHENTICATION"""

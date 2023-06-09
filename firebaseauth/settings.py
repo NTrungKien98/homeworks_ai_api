@@ -95,8 +95,8 @@ DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
         "NAME": 'firebaseauth',
-        "USER": 'k',
-        "PASSWORD": '1',
+        "USER": 'root',
+        "PASSWORD": '123456',
         "HOST": 'localhost',
         "PORT": '3306',
     }

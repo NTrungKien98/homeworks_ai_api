@@ -31,21 +31,27 @@ openai.api_key = "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"
 from auth_firebase.views_login.login import *
 from auth_firebase.views_login.signup import *
 from auth_firebase.views_data_manage import *
-class QuestionAPIView(APIView):
-       serializer_class = CategorySerializer
+class QuestionAPIView(GenericAPIView):
+       queryset = Question.objects.all()
        pagination_class = CustomPagination
+       serializer_class = QuestionSerializer
        """This api will handle questions"""
        # permission_classes = [ IsAuthenticated ]
        """Here just add FirebaseAuthentication class in authentication_classes"""
-       def get(self,request):
-              data = Question.objects.filter()
-              serializer = QuestionSerializer(data, many = True)
-              response = {
-                     "status": status.HTTP_200_OK,
-                     "message": "success",
-                     "data": serializer.data
-                     }
-              return Response(response, status = status.HTTP_200_OK)
+
+       def get(self, request, id):
+              self.pagination_class = CustomPagination
+              queryset      = self.filter_queryset(self.queryset.filter(categories__id = id))
+              page          = self.paginate_queryset(queryset)
+
+              if page is not None:
+                     serializer    = self.get_serializer(page, many=True)
+                     return self.get_paginated_response(serializer.data)
+
+              serializer    = self.get_serializer(queryset, many=True)
+
+              return Response(serializer.data)
+
 
 class CategoryAPIView(GenericAPIView):
        queryset = Category.objects.all()

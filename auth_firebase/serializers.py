@@ -13,7 +13,7 @@ class QuestionSerializer(serializers.ModelSerializer):
             fields = ['question', 'choices']
 
 class CategorySerializer(serializers.HyperlinkedModelSerializer):
-    questions = QuestionSerializer(many=True)
+    # questions = QuestionSerializer(many=True)
     class Meta:
             model = Category
-            fields = ['name', 'grade', 'level', 'subject', 'questions']
+            fields = ['name', 'grade', 'level', 'subject']
