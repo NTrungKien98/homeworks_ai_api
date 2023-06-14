@@ -17,6 +17,8 @@ class Choice(models.Model):
        title         = models.CharField(max_length=50, null=False)
        isAnswer      = models.BooleanField(default=False)
        question      = models.ForeignKey(Question, related_name="choices", on_delete=models.CASCADE)
+       def __str__(self):
+              return str(self.title)
 
 class Category(models.Model):
        list_subjects = (
@@ -27,15 +29,17 @@ class Category(models.Model):
               )
        list_grades   = ((1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6), (7, 7), (8, 8), (9, 9), (10, 10), (11, 11), (12, 12))
        list_levels   = ((1, 'Easy'), (2, 'Normal'), (3, 'Hard'))
-
+       list_languages= ((1, 'English'), (2, 'Tiếng Việt'))
        # id            = models.CharField(max_length=10, null=False, auto_created=True, primary_key=True)
        name          = models.CharField(max_length=50)
        grade         = models.IntegerField(choices=list_grades, default=1)
        level         = models.IntegerField(choices=list_levels, default=1)
        subject       = models.IntegerField(choices=list_subjects, default=1)
        questions     = models.ManyToManyField(Question, related_name="categories")
-
+       language      = models.IntegerField(choices=list_languages, default=1)
 # class QuestionCategory(models.Model):
 #        question      = models.ForeignKey(Question, on_delete=models.CASCADE)
 #        category      = models.ForeignKey(Category, on_delete=models.CASCADE)
+       def __str__(self):
+              return str(self.name)
 

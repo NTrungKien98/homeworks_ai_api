@@ -1,5 +1,9 @@
-from django.urls import path
+from django.urls import path, include
+from rest_framework import routers
 from .views import *
+router = routers.DefaultRouter()
+router.register(r'upload', FileUploadView, basename="upload")
+
 urlpatterns = [
     path("api/questions/<int:id>", QuestionAPIView.as_view()),
     path("api/categories/<int:grade>/<int:subject>/<int:level>", CategoryAPIView.as_view()),
@@ -14,4 +18,5 @@ urlpatterns = [
     path("delete_question/<int:id>", delete_question, name='delete_question'),
     path('chat/', chat, name='chat'),
     path('sign_up_with_username', sign_up_with_username),
+    path('', include(router.urls)),
   ]

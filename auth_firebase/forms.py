@@ -33,8 +33,11 @@ class NewCategoryForm(forms.ModelForm):
     class Meta:
         model = Category
         fields = ['name', 'grade','level', 'subject', 'questions']
-        questions = CustomMMCF(
+        questions = forms.ModelMultipleChoiceField(
                                                     queryset=Question.objects.all(),
                                                     widget=forms.CheckboxSelectMultiple()
                                                     )
 
+class UploadFileForm(forms.Form):
+    title = forms.CharField(max_length=50)
+    file = forms.FileField()

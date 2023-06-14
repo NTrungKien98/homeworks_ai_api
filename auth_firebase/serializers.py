@@ -17,3 +17,8 @@ class CategorySerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
             model = Category
             fields = ['name', 'grade', 'level', 'subject']
+
+class UploadSerializer(serializers.Serializer):
+    file_uploaded = serializers.FileField()
+    class Meta:
+        fields = ['file_uploaded']
